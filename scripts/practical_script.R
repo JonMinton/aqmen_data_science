@@ -130,6 +130,8 @@ dta_tidy %>%
   mutate(death_rate = 100000 * death_count / population_count) %>% 
   ggplot(.) + geom_line(aes(x = year, y = death_rate))
 
+ggsave("figures/practical_q01.png", width = 10, height = 10, dpi = 150, units = "cm")
+
 # Question 2: Do the above, but for males and females separately
 
 
@@ -140,6 +142,8 @@ dta_tidy %>%
   summarise(death_count = sum(death_count), population_count = sum(population_count)) %>% 
   mutate(death_rate = 100000 * death_count / population_count) %>% 
   ggplot(.) + geom_line(aes(x = year, y = death_rate, group = sex, linetype = sex))
+
+ggsave("figures/practical_q02.png", width = 10, height = 10, dpi = 150, units = "cm")
 
 # Question 3: Repeat the above, but index male and female death rates to their 1999 values
 
@@ -155,6 +159,8 @@ dta_tidy %>%
   mutate(death_trend = death_rate / death_rate[year == 1999]) %>% 
   ggplot(.) + geom_line(aes(x = year, y = death_trend, group = sex, linetype = sex))
 
+ggsave("figures/practical_q03.png", width = 10, height = 10, dpi = 150, units = "cm")
+
 # Question 4: Produce the death rate trends, indexed to 1999 values, for each sex and age in single years 
 
 dta_tidy %>% 
@@ -165,6 +171,9 @@ dta_tidy %>%
   mutate(death_trend = death_rate / death_rate[year == 1999]) %>% 
   ggplot(.) + geom_line(aes(x = year, y = death_trend, group = sex, linetype = sex)) +
   facet_wrap(~ age)
+
+ggsave("figures/practical_q04.png", width = 15, height = 10, dpi = 150, units = "cm")
+
 
 # Question 5: Perform the age adjustment: i.e produce the average age/sex specific trend in all-cause mortality within this 
 # period 
@@ -180,6 +189,7 @@ dta_tidy %>%
   summarise(death_trend = mean(death_trend)) %>% 
   ggplot(.) + geom_line(aes(x = year, y = death_trend))
 
+ggsave("figures/practical_q05.png", width = 10, height = 10, dpi = 150, units = "cm")
 
 
 # Question 6: What has happened to the male and female black/white mortality gap between 1999 and 2014? 
@@ -194,5 +204,5 @@ dta_tidy %>%
   ggplot(.) + 
   geom_line(aes(x = year, y = bw_ratio, group = sex, linetype = sex)) 
 
-
+ggsave("figures/practical_q06.png", width = 10, height = 10, dpi = 150, units = "cm")
 
